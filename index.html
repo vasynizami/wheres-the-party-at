@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Artist Show City App</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link href="css/styles.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <div class="container">
+      <h2>Artist Show City App</h2>
+      <div id="intro"><p>Easily plan your night out with this super simple website that gives you all the events featuring the artists you follow on Soundcloud that are happening in a city of your choice this month.<p></div>
+      <form id="search">
+        <input type="text" id="query" placeholder="Enter City Name" />
+        <button>Search</button>
+      </form>
+
+      <div id="results">
+        <div id="city-data"></div>
+        <div id="city-gif"></div>
+        <div id="weather-desc-gif"></div>
+      </div>
+    </div>
+
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>

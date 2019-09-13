@@ -1,0 +1,58 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.container {
+  padding-top: 100px;
+  width: 1080px;
+  margin: 0 auto;
+  flex-direction: column;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100vh;
+}
+
+#intro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  max-width: 620px;
+}
+
+#search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+#search p {
+  font-size: 1.2rem;
+  padding: 0;
+  margin-right: 20px;
+  font-weight: bold;
+}
+
+#search input {
+  padding: 5px;
+  width: 300px;
+  font-size: 1.2rem;
+}
+
+#search button {
+  font-weight: bold;
+  background: #818194;
+  color: white;
+  border-radius: 4px;
+  margin-left: 10px;
+  font-size: 1rem;
+  padding: 7px;
+}
+
+.results-table {
+  width: 100%;
+  /* display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%; */
+}
