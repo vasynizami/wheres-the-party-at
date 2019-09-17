@@ -4,9 +4,13 @@ $(function () {
     console.log('submitting')
     const query = $('#query').val()
 
-    processRequest(query)
+    // processRequest(query)
   })
 
+  $('#connectSoundcloud').click(() => {
+    //a new pop-up window should appear
+  })
+  
   function displayResults (data) {
     console.log('data in displayResults:', data)
 
@@ -30,21 +34,10 @@ $(function () {
     // $('#link').html(`
     //   <p></p>
     // `)
-    $('#results').html(``)
+
   }
 
 
-  function SC.initialize({
-    client_id: 'cc9a68be6a2bb7223494dae134d1a0ad',
-    // redirect_uri: 'https://example.com/callback'
-  });
-
-  // initiate auth popup
-  SC.connect().then(function() {
-    return SC.get('/me');
-  }).then(function(me) {
-    alert('Hello, ' + me.username);
-  })
 
   // async function SoundCloud (data) {
   //    try {
