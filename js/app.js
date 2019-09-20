@@ -8,9 +8,9 @@ $(function () {
     // processRequest (query)
   })
 
-  // $('#connectSoundcloud').click(() => {
-  //   //a new pop-up window should appear
-  // })
+  $('#connectSoundcloud').click(() => {
+    //a new pop-up window should appear
+  })
 
   // function displayResults (data) {
   //   console.log('data in displayResults:', data)

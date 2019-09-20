@@ -10,23 +10,32 @@
   </head>
 
   <body>
-    <div class="container">
-      <h2>Artist Show City App</h2>
-      <nav id="connectSoundcloud"><a href="#"><button>Connect with SoundCloud</button></a></nav>
-      <img src="img/powered-by-songkick-pink.png">
+    <!-- <div class="container"> -->
+      <header>
+        <img src="img/powered-by-songkick-pink.png">
+        <h2>Where's The Party At</h2>
+        <nav id="connectSoundcloud"><a href="#"><button>Connect with SoundCloud</button></a></nav>
+      </header>
       <div id="intro"><p>Easily plan your night out with this super simple website that gives you all the events featuring the artists you follow on Soundcloud that are happening in a city of your choice this month.<p></div>
       <form id="search">
         <input type="text" id="query" placeholder="Enter City Name" />
         <button>Search</button>
       </form>
 
-      <div id="results">
-        <div id="date"></div>
-        <div id="eventName"></div>
-        <div id="lineup"></div>
-        <div id="link"></div>
-      </div>
-    </div>
+      <table class="table" id="results-table">
+        <thead>
+          <tr>
+            <th>exact date</th>
+            <th>event name</th>
+            <th>lineup</th>
+            <th>link to SongKick</th>
+          </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+      </table>
+
 
 
     <script
@@ -35,7 +44,7 @@
       crossorigin="anonymous"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="js/app.js"></script>
-    <!-- <script src="https://connect.soundcloud.com/sdk/sdk-3.3.2.js"></script>
+    <script src="https://connect.soundcloud.com/sdk/sdk-3.3.2.js"></script>
     <script>
       SC.initialize({
         client_id: 'cc9a68be6a2bb7223494dae134d1a0ad',
@@ -48,7 +57,7 @@
       }).then(function(me) {
         alert('Hello, ' + me.username);
       });
-      </script> -->
+      </script>
 
   </body>
 </html>

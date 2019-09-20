@@ -1,18 +1,18 @@
 body {
   font-family: 'Open Sans', sans-serif;
-}
-
-.container {
   padding-top: 100px;
-  width: 1080px;
+  max-width: 1080px;
   margin: 0 auto;
-  flex-direction: column;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  height: 100vh;
 }
-
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+ header img {
+   width: 214px;
+ }
 
 #intro {
   display: flex;
