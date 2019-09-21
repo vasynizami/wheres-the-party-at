@@ -1,63 +1,19 @@
 $(function () {
+
+  // let'd declare var for the map (we'll need to use it for coordinates later)
+  let mymap
+
+  // searching city
   $('#search').submit((event) => {
     event.preventDefault()
     console.log('submitting')
     const query = $('#query').val()
-
+    // here we call the fx to make an api call to SongKick to find the metro area Id
     songKickMetroId (query)
-    // processRequest (query)
   })
 
-  $('#connectSoundcloud').click(() => {
-    //a new pop-up window should appear
-  })
 
-  // function displayResults (data) {
-  //   console.log('data in displayResults:', data)
-
-    // // 1. print out date
-    // $('#date').html(`
-    //   <p></p>
-    // `)
-    //
-    // // 2. print out name of the event
-    // $('#eventName').html(`
-    //   <p></p>
-    // `)
-
-    // // 3. print out lineup
-    // $('#lineup').html(`
-    //   <p></p>
-    // `)
-    //
-    // // 4. print out SongKick link
-    // $('#link').html(`
-    //   <p></p>
-    // `)
-
-  // }
-
-  // async function processRequest (query) {
-  //     try {
-  //       // 1. make an API request to SongKick to find metroAreaId
-  //       const locationData = await songKickMetroId (query)
-  //       console.log(locationData)
-  //
-  //
-  //       // 2. make an API request to SongKick to find events
-  //       const calendarData = await songKick (metroAreaId)
-  //       console.log(calendarData)
-  //
-  //
-  //
-  //       // es6 syntax
-  //       // displayResults({ weatherData, giphyData, giphyWeatherDesc })
-  //     } catch (e) {
-  //       console.log(e)
-  //     }
-  //   }
-
-  // finding metro area Id by location
+  // finding metro area Id of the city in the imput field
   async function songKickMetroId (query) {
      try {
        const url = 'https://api.songkick.com/api/3.0/search/locations.json'
@@ -71,56 +27,61 @@ $(function () {
          }
        })
 
-        console.log(response)
-        // songKick (response, query)
+     // we need to call mymap from Leafletjs.com library for the given metro area ID
+     // "!mymap" means "not mymap"(if it hasn't been defined yet), run this code; else mymap has been defined so we just shift position - we do this in order to not have to refresh the page after every search imput
+     // 13 in setView params means zoom
+      if (!mymap){
+        mymap = L.map('mapid').setView([response.data.resultsPage.results.location[0].metroArea.lat, response.data.resultsPage.results.location[0].metroArea.lng], 13)
+        // adding tile layer
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}).addTo(mymap)
+      } else {
+        mymap.setView([response.data.resultsPage.results.location[0].metroArea.lat, response.data.resultsPage.results.location[0].metroArea.lng])
+     }
 
-      } catch (e) {
+      console.log(response)
+      songKickEvents (response.data.resultsPage.results.location[0].metroArea.id)
+
+    } catch (e) {
         console.log(e)
-      }
+    }
   }
 
+  // finding events in certain metro area
+  async function songKickEvents (metroAreaId) {
 
-  // // finding calendar of events in certain metro area
-  // async function songKick (metroAreaId) {
-  //    try {
-  //
-  //      const url = 'https://api.songkick.com/api/3.0/metro_areas'
-  //      const apiKey = 'TqavoctyFoq8jj9i'
-  //
-  //      // make api request using axios
-  //      const response = await axios.get(url, {
-  //        params: {
-  //          apikey: apiKey,
-  //          metro_area_id: metroAreaId.data.resultsPage.results.location[0].metroArea.id,
-  //          min_date: '2019-09-14',
-  //          max_date: '2019-10-14'
-  //        }
-  //      })
-  //
-  //      console.log(response)
-  //
-  //    } catch (e) {
-  //      console.log(e)
-  //    }
-  //  }
+     try {
 
-   // async function soundCloud (data) {
-   //    try {
-   //      const url = 'https://api.soundcloud.com'
-   //      const apiKey = 'cc9a68be6a2bb7223494dae134d1a0ad'
-   //
-   //      // make api request using axios
-   //      const response = await axios.get(url, {
-   //        params: {
-   //          client_ID: apiKey,
-   //
-   //        }
-   //      })
-   //
-   //      console.log(response)
-   //      return response.data
-   //    } catch (e) {
-   //      console.log(e)
-   //    }
-   //  }
+       console.log(metroAreaId)
+       const url = `https://api.songkick.com/api/3.0/metro_areas/${metroAreaId}/calendar.json`
+       const apiKey = 'TqavoctyFoq8jj9i'
+       // this fx allows our app to access today's date; slice(0,10) allows us to look at the first 10 characters in ISO standard date
+       let today = new Date().toISOString().slice(0,10)
+       // make api request using axios
+       const response = await axios.get(url, {
+         params: {
+           apikey: apiKey,
+           metro_area_id: metroAreaId,
+           min_date: today,
+           max_date: today
+         }
+       })
+
+       console.log(response)
+
+       let arr = response.data.resultsPage.results.event
+
+       // this loop allows us to iterate through each element of the array, we don't need to know the index
+       for(let event of arr){
+         let a = `<a href = "${event.uri}"> SongKick Link </a>`
+         L.marker([event.location.lat, event.location.lng]).addTo(mymap)
+          .bindPopup(event.displayName + a)
+          .openPopup()
+       }
+
+     } catch (e) {
+       console.log(e)
+     }
+   }
+
  })
