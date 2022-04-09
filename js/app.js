@@ -17,7 +17,7 @@ $(function () {
   async function songKickMetroId (query) {
      try {
        const url = 'https://api.songkick.com/api/3.0/search/locations.json'
-       const apiKey = 'API_KEY'
+       const apiKey = 'TqavoctyFoq8jj9i'
 
        // make api request using axios (JSON = response)
        const response = await axios.get(url, {
@@ -54,7 +54,7 @@ $(function () {
 
        console.log(metroAreaId)
        const url = `https://api.songkick.com/api/3.0/metro_areas/${metroAreaId}/calendar.json`
-       const apiKey = 'API_KEY'
+       const apiKey = 'TqavoctyFoq8jj9i'
        // this fx allows our app to access today's date; slice(0,10) allows us to look at the first 10 characters in ISO standard date
        let today = new Date().toISOString().slice(0,10)
        // make api request using axios
